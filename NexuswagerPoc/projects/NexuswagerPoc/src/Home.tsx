@@ -6,10 +6,10 @@ import NFTmint from './components/NFTmint'
 import Transact from './components/Transact'
 
 const Home: React.FC = () => {
-  const [openWalletModal, setOpenWalletModal] = useState<boolean>(false)
-  const [openDemoModal, setOpenDemoModal] = useState<boolean>(false)
-  const [openNFTModal, setOpenNFTModal] = useState<boolean>(false)
-  const [claimed, setClaimed] = useState<boolean>(false)
+  const [openWalletModal, setOpenWalletModal] = useState(false)
+  const [openDemoModal, setOpenDemoModal] = useState(false)
+  const [openNFTModal, setOpenNFTModal] = useState(false)
+  const [claimed, setClaimed] = useState(false)
 
   const { activeAddress } = useWallet()
 
@@ -20,70 +20,75 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white relative">
-      {/* gamer vibe background with icons */}
-      <div className="absolute inset-0 opacity-10 bg-[url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png')] bg-repeat" />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-black to-blue-950 p-6">
+      {/* iPhone 13 frame */}
+      <div className="relative bg-black rounded-[3rem] shadow-2xl w-[390px] h-[844px] flex items-center justify-center overflow-hidden border-[12px] border-gray-800">
+        {/* Screen area */}
+        <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6 text-center bg-gradient-to-b from-black via-blue-950 to-black text-white font-sans">
+          {/* Notch */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-6 bg-black rounded-b-2xl" />
 
-      <div className="relative z-10 text-center p-8 bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg max-w-lg w-full">
-        {/* Headline */}
-        <h1 className="text-4xl font-extrabold mb-4 text-purple-200 drop-shadow">
-          Welcome to <span className="text-blue-300">Nexuswager 🎮</span>
-        </h1>
-        <p className="mb-6 text-lg text-gray-200">
-          Your ticket to join a global{' '}
-          <span className="font-semibold text-purple-300">gaming community</span>  
-          using virtual currency. Play, connect, and win together!
-        </p>
+          {/* Headline */}
+          <h1 className="text-3xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 drop-shadow-lg">
+            Welcome to Nexuswager 🎮
+          </h1>
 
-        {/* Buttons */}
-        <div className="flex flex-col gap-3">
-          {/* Connect Wallet */}
-          <button
-            onClick={() => setOpenWalletModal(true)}
-            className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
-          >
-            Connect Wallet
-          </button>
+          {/* Sub description */}
+          <p className="mb-6 text-base font-medium text-gray-200 leading-relaxed px-2">
+            Step into the{" "}
+            <span className="text-blue-400 font-semibold">future of gaming</span>.  
+            Play, connect, and win with{" "}
+            <span className="text-pink-400 font-semibold">virtual currency</span>.
+          </p>
 
-          {/* Show these only if wallet is connected */}
-          {activeAddress && (
-            <>
-              <button
-                onClick={() => setOpenDemoModal(true)}
-                className="btn bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg"
-              >
-                Send Payment
-              </button>
+          {/* Buttons */}
+          <div className="flex flex-col gap-3 w-full px-6">
+            <button
+              onClick={() => setOpenWalletModal(true)}
+              className="py-3 w-full rounded-xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg hover:scale-105 transition transform"
+            >
+              Connect Wallet
+            </button>
 
-              <button
-                onClick={() => setOpenNFTModal(true)}
-                className="btn bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-bold py-2 px-4 rounded-lg"
-              >
-                Mint MasterPass NFT
-              </button>
-            </>
-          )}
+            {activeAddress && (
+              <>
+                <button
+                  onClick={() => setOpenDemoModal(true)}
+                  className="py-3 w-full rounded-xl font-bold bg-gradient-to-r from-pink-500 to-purple-700 shadow-lg hover:scale-105 transition transform"
+                >
+                  Send Payment
+                </button>
 
-          {/* Free Nexuscoin Claim */}
-          <button
-            onClick={claimFreeCoins}
-            className="btn bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white font-bold py-2 px-4 rounded-lg"
-          >
-            Get Your Free Nexuscoin!!!
-          </button>
+                <button
+                  onClick={() => setOpenNFTModal(true)}
+                  className="py-3 w-full rounded-xl font-bold bg-gradient-to-r from-indigo-500 to-blue-600 shadow-lg hover:scale-105 transition transform"
+                >
+                  Mint MasterPass NFT
+                </button>
+              </>
+            )}
+
+            {/* Free Nexuscoin Claim */}
+            <button
+              onClick={claimFreeCoins}
+              className="py-3 w-full rounded-xl font-bold bg-gradient-to-r from-green-400 to-lime-500 shadow-lg hover:scale-105 transition transform"
+            >
+              Get Your Free Nexuscoin!!!
+            </button>
+          </div>
 
           {/* Success message */}
           {claimed && (
-            <div className="mt-4 p-3 bg-green-500 text-white font-semibold rounded-lg">
+            <div className="mt-6 p-3 bg-green-500 text-black font-semibold rounded-lg shadow-lg">
               🎉 You've claimed your free coins!
             </div>
           )}
-        </div>
 
-        {/* Modals */}
-        <ConnectWallet openModal={openWalletModal} closeModal={() => setOpenWalletModal(false)} />
-        <Transact openModal={openDemoModal} setModalState={setOpenDemoModal} />
-        <NFTmint openModal={openNFTModal} setModalState={setOpenNFTModal} />
+          {/* Modals */}
+          <ConnectWallet openModal={openWalletModal} closeModal={() => setOpenWalletModal(false)} />
+          <Transact openModal={openDemoModal} setModalState={setOpenDemoModal} />
+          <NFTmint openModal={openNFTModal} setModalState={setOpenNFTModal} />
+        </div>
       </div>
     </div>
   )
